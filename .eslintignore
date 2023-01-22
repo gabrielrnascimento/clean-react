@@ -3,3 +3,4 @@ node_modules
 coverage
 jest.config.js
 public
+webpack.config.js
