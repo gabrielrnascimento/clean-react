@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "test": "jest --passWithNoTests --no-cache --runInBand",
-    "test:watch": "npm test -- --watch",
+    "test:watch": "npm test -- --watch --silent",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage"
   },
