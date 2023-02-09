@@ -1,5 +1,5 @@
-import { Authentication, AuthenticationParams } from '@/domain/usecases/authentication';
-import { AccountModel } from '@/domain/models/account-model';
+import { type Authentication, type AuthenticationParams } from '@/domain/usecases/authentication';
+import { type AccountModel } from '@/domain/models/account-model';
 import { mockAccountModel } from '@/domain/test';
 
 export class AuthenticationSpy implements Authentication {
@@ -10,6 +10,6 @@ export class AuthenticationSpy implements Authentication {
 	async auth (params: AuthenticationParams): Promise<AccountModel> {
 		this.params = params;
 		this.callsCount++;
-		return Promise.resolve(this.account);
+		return await Promise.resolve(this.account);
 	}
 }

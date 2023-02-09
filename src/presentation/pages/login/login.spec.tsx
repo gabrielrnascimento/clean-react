@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import faker from 'faker';
 import 'jest-localstorage-mock';
-import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, type RenderResult, waitFor } from '@testing-library/react';
 import { Login } from '@/presentation/pages';
 import { ValidationStub, AuthenticationSpy } from '@/presentation/test';
 import { InvalidCredentialsError } from '@/domain/errors';
@@ -11,11 +11,11 @@ import { InvalidCredentialsError } from '@/domain/errors';
 type SutTypes = {
 	sut: RenderResult
 	authenticationSpy: AuthenticationSpy
-}
+};
 
 type SutParams = {
 	validationError: string
-}
+};
 
 const history = createMemoryHistory({ initialEntries: ['/login'] });
 

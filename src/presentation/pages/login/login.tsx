@@ -3,13 +3,13 @@ import { Link, useHistory } from 'react-router-dom';
 import Styles from './login-styles.scss';
 import { Footer, Input, LoginHeader, FormStatus } from '@/presentation/components';
 import Context from '@/presentation/contexts/form/form-context';
-import { Validation } from '@/presentation/protocols/validation';
-import { Authentication } from '@/domain/usecases/authentication';
+import { type Validation } from '@/presentation/protocols/validation';
+import { type Authentication } from '@/domain/usecases/authentication';
 
 type Props = {
 	validation: Validation
 	authentication: Authentication
-}
+};
 
 const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
 	const history = useHistory();

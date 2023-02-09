@@ -8,13 +8,14 @@
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage"
+    "test:ci": "npm test -- --coverage",
+    "check": "npm-check -u -s"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-		"@testing-library/react": "^12.1.0",
+    "@testing-library/react": "^12.1.0",
     "@types/axios": "^0.14.0",
     "@types/faker": "^5.5.3",
     "@types/jest": "^29.2.5",
@@ -26,7 +27,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
     "eslint": "^8.32.0",
-    "eslint-config-standard-with-typescript": "^11.0.1",
+    "eslint-config-standard-with-typescript": "^34.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",

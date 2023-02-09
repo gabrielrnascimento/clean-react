@@ -5,7 +5,7 @@ import faker from 'faker';
 type SutTypes = {
 	sut: ValidationComposite
 	fieldValidationsSpy: FieldValidationSpy[]
-}
+};
 
 const makeSut = (fieldName: string): SutTypes => {
 	const fieldValidationsSpy = [
