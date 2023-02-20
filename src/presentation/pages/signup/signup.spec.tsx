@@ -1,8 +1,9 @@
 import React from 'react';
 import SignUp from './signup';
-import { type RenderResult, render, cleanup, fireEvent } from '@testing-library/react';
+import { type RenderResult, render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import faker from 'faker';
 import { AddAccountSpy, Helper, ValidationStub } from '@/presentation/test';
+import { EmailInUseError } from '@/domain/errors';
 
 type SutTypes = {
 	sut: RenderResult
@@ -36,6 +37,11 @@ const simulateValidSubmit = (sut: RenderResult, name = faker.name.findName(), em
 	Helper.populateField(sut, 'passwordConfirmation', password);
 	const submitButton = sut.getByTestId('submit');
 	fireEvent.click(submitButton);
+};
+
+const testElementText = (sut: RenderResult, fieldName: string, text: string): void => {
+	const element = sut.getByTestId(fieldName);
+	expect(element.textContent).toBe(text);
 };
 
 describe('SignUp Component', () => {
@@ -146,5 +152,16 @@ describe('SignUp Component', () => {
 		Helper.populateField(sut, 'email');
 		fireEvent.submit(sut.getByTestId('form'));
 		expect(addAccountSpy.callsCount).toBe(0);
+	});
+
+	test('Should present error if AddAccount fails', async () => {
+		const { sut, addAccountSpy } = makeSut();
+		const error = new EmailInUseError();
+		jest.spyOn(addAccountSpy, 'add').mockRejectedValueOnce(error);
+		simulateValidSubmit(sut);
+		await waitFor(() => {
+			Helper.testChildCount(sut, 'error-wrap', 1);
+			testElementText(sut, 'main-error', error.message);
+		});
 	});
 });
