@@ -39,11 +39,6 @@ const simulateValidSubmit = (sut: RenderResult, name = faker.name.findName(), em
 	fireEvent.click(submitButton);
 };
 
-const testElementText = (sut: RenderResult, fieldName: string, text: string): void => {
-	const element = sut.getByTestId(fieldName);
-	expect(element.textContent).toBe(text);
-};
-
 describe('SignUp Component', () => {
 	afterEach(cleanup);
 
@@ -161,7 +156,7 @@ describe('SignUp Component', () => {
 		simulateValidSubmit(sut);
 		await waitFor(() => {
 			Helper.testChildCount(sut, 'error-wrap', 1);
-			testElementText(sut, 'main-error', error.message);
+			Helper.testElementText(sut, 'main-error', error.message);
 		});
 	});
 });
