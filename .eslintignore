@@ -5,3 +5,4 @@ jest.config.js
 public
 webpack.config.js
 *.scss
+*.json
