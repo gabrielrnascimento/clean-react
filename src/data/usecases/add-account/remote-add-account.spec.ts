@@ -2,7 +2,7 @@ import { RemoteAddAccount } from './remote-add-account';
 import { HttpPostClientSpy } from '@/data/test';
 import { HttpStatusCode } from '@/data/protocols/http';
 import { type AddAccountParams } from '@/domain/usecases';
-import { type AccountModel } from '@/domain/models/account-model';
+import { type AccountModel } from '@/domain/models';
 import { mockAccountModel, mockAddAccountParams } from '@/domain/test';
 import { EmailInUseError, UnexpectedError } from '@/domain/errors';
 import faker from 'faker';

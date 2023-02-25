@@ -1,6 +1,6 @@
 import { HttpStatusCode, type HttpPostClient } from '@/data/protocols/http';
 import { EmailInUseError, UnexpectedError } from '@/domain/errors';
-import { type AccountModel } from '@/domain/models/account-model';
+import { type AccountModel } from '@/domain/models';
 import { type AddAccountParams, type AddAccount } from '@/domain/usecases';
 
 export class RemoteAddAccount implements AddAccount {

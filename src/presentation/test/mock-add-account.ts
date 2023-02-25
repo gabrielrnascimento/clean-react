@@ -1,4 +1,4 @@
-import { type AccountModel } from '@/domain/models/account-model';
+import { type AccountModel } from '@/domain/models';
 import { mockAccountModel } from '@/domain/test';
 import { type AuthenticationParams, type AddAccount, type AddAccountParams } from '@/domain/usecases';
 

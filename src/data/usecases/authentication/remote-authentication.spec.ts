@@ -4,7 +4,7 @@ import { HttpStatusCode } from '@/data/protocols/http';
 import { mockAccountModel, mockAuthentication } from '@/domain/test';
 import { InvalidCredentialsError, UnexpectedError } from '@/domain/errors';
 import { type AuthenticationParams } from '@/domain/usecases/authentication';
-import { type AccountModel } from '@/domain/models/account-model';
+import { type AccountModel } from '@/domain/models';
 import faker from 'faker';
 
 type SutTypes = {
