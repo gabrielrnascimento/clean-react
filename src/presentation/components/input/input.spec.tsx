@@ -2,7 +2,7 @@ import React from 'react';
 import faker from 'faker';
 import { fireEvent, render, type RenderResult } from '@testing-library/react';
 import Input from './input';
-import Context from '@/presentation/contexts/form/form-context';
+import { FormContext as Context } from '@/presentation/contexts';
 
 const makeSut = (fieldName: string): RenderResult => {
 	return render(
