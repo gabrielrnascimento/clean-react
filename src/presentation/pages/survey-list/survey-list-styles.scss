@@ -94,6 +94,7 @@
 						font-size: 18px;
 						margin: 24px;
 						align-self: center;
+						flex-grow: 1;
 					}
 
 				}
@@ -114,5 +115,17 @@
 			}
 		}
 
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.surveyListWrap {
+		.contentWrap {
+			ul {
+				li {
+					flex-basis: 100%;
+				}
+			}
+		}
 	}
 }
