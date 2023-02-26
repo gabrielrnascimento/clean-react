@@ -3,20 +3,25 @@ import axios, { type AxiosResponse } from 'axios';
 
 export class AxiosHttpClient implements HttpPostClient, HttpGetClient {
 	async post (params: HttpPostParams): Promise<HttpResponse> {
-		let AxiosResponse: AxiosResponse;
+		let axiosResponse: AxiosResponse;
 		try {
-			AxiosResponse = await axios.post(params.url, params.body);
+			axiosResponse = await axios.post(params.url, params.body);
 		} catch (error) {
-			AxiosResponse = error.response;
+			axiosResponse = error.response;
 		}
 		return {
-			statusCode: AxiosResponse.status,
-			body: AxiosResponse.data
+			statusCode: axiosResponse.status,
+			body: axiosResponse.data
 		};
 	}
 
 	async get (params: HttpGetParams): Promise<HttpResponse> {
-		const axiosResponse = await axios.get(params.url);
+		let axiosResponse: AxiosResponse;
+		try {
+			axiosResponse = await axios.get(params.url);
+		} catch (error) {
+			axiosResponse = error.response;
+		}
 		return {
 			statusCode: axiosResponse.status,
 			body: axiosResponse.data
