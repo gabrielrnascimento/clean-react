@@ -76,7 +76,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
 	};
 
 	return (
-		<div className={Styles.signup}>
+		<div className={Styles.signUpWrap}>
 			<LoginHeader />
 			<Context.Provider value={ { state, setState } }>
 				{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}

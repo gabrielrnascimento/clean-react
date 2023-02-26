@@ -64,7 +64,7 @@ const Login: React.FC<Props> = ({ validation, authentication, saveAccessToken }:
 	};
 
 	return (
-		<div className={Styles.login}>
+		<div className={Styles.loginWrap}>
 			<LoginHeader />
 			<Context.Provider value={{ state, setState }}>
 				{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
