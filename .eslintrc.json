@@ -24,6 +24,7 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/indent": [2, "tab"],
+		"@typescript-eslint/no-floating-promises": "off",
 		"indent": "off",
     "@typescript-eslint/no-unused-vars": "warn",
 		"semi": "off",
