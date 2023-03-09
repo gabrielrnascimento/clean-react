@@ -1,5 +1,5 @@
 import { Icon, IconName } from '@/presentation/components';
-import Styles from './survey-item-styles.scss';
+import Styles from './item-styles.scss';
 import React from 'react';
 import { type SurveyModel } from '@/domain/models';
 
