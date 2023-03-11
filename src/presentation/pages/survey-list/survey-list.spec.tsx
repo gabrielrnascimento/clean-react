@@ -3,7 +3,7 @@ import { type SurveyModel } from '@/domain/models';
 import { type LoadSurveyList } from '@/domain/usecases';
 import { mockSurveyListModel } from '@/domain/test';
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { UnexpectedError } from '@/domain/errors';
 
 class LoadSurveyListSpy implements LoadSurveyList {
@@ -58,5 +58,15 @@ describe('SurveyListComponent', () => {
 		await waitFor(() => screen.getAllByRole('heading'));
 		expect(screen.queryByTestId('survey-list')).not.toBeInTheDocument();
 		expect(screen.getByTestId('error')).toHaveTextContent(error.message);
+	});
+
+	test('Should call LoadSurveyList on reload', async () => {
+		const loadSurveyListSpy = new LoadSurveyListSpy();
+		jest.spyOn(loadSurveyListSpy, 'loadAll').mockRejectedValueOnce(new UnexpectedError());
+		makeSut(loadSurveyListSpy);
+		await waitFor(() => screen.getAllByRole('heading'));
+		fireEvent.click(screen.getByTestId('reload'));
+		await waitFor(() => screen.getAllByRole('heading'));
+		expect(loadSurveyListSpy.callsCount).toBe(1);
 	});
 });
