@@ -1,3 +1,3 @@
-export interface getStorage {
+export interface GetStorage {
 	get: (key: string) => any
 }

@@ -1,6 +1,6 @@
-import { type getStorage, type SetStorage } from '@/data/protocols/cache';
+import { type GetStorage, type SetStorage } from '@/data/protocols/cache';
 
-export class LocalStorageAdapter implements SetStorage, getStorage {
+export class LocalStorageAdapter implements SetStorage, GetStorage {
 	set (key: string, value: object): void {
 		localStorage.setItem(key, JSON.stringify(value));
 	}
