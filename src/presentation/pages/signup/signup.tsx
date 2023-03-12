@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Styles from './signup-styles.scss';
 import { Footer, Input, LoginHeader, FormStatus, SubmitButton } from '@/presentation/components';
-import Context from '@/presentation/contexts/form/form-context';
+import { ApiContext, FormContext } from '@/presentation/contexts';
 import { type Validation } from '@/presentation/protocols/validation';
-import { type SaveAccessToken, type AddAccount } from '@/domain/usecases';
+import { type AddAccount } from '@/domain/usecases';
 import { Link, useHistory } from 'react-router-dom';
 
 type Props = {
 	validation: Validation
 	addAccount: AddAccount
-	saveAccessToken: SaveAccessToken
 };
 
-const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Props) => {
+const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
+	const { setCurrentAccount } = useContext(ApiContext);
 	const history = useHistory();
 	const [state, setState] = useState({
 		isLoading: false,
@@ -64,7 +64,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
 				password: state.password,
 				passwordConfirmation: state.passwordConfirmation
 			});
-			await saveAccessToken.save(account.accessToken);
+			setCurrentAccount(account);
 			history.replace('/');
 		} catch (error) {
 			setState({
@@ -76,9 +76,9 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
 	};
 
 	return (
-		<div className={Styles.signup}>
+		<div className={Styles.signUpWrap}>
 			<LoginHeader />
-			<Context.Provider value={ { state, setState } }>
+			<FormContext.Provider value={ { state, setState } }>
 				{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
 				<form data-testid='form' className={Styles.form} onSubmit={handleSubmit}>
 					<h2>Criar Conta</h2>
@@ -90,7 +90,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
 					<Link data-testid="login-link" replace to="/login" className={Styles.link}>Voltar para Login</Link>
 					<FormStatus />
 				</form>
-			</Context.Provider>
+			</FormContext.Provider>
 			<Footer />
 		</div>
 	);
