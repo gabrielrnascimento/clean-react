@@ -1,10 +1,14 @@
 import * as FormHelper from '../support/form-helper';
-import * as Http from './login-mocks';
+import * as Http from '../support/login-mocks';
 import faker from 'faker';
 
-const simulateValidSubmit = (): void => {
+const populateFields = (): void => {
 	cy.getByTestId('email').focus().type(faker.internet.email());
 	cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
+};
+
+const simulateValidSubmit = (): void => {
+	populateFields();
 	cy.getByTestId('submit').click();
 };
 
@@ -61,19 +65,18 @@ describe('Login', () => {
 		FormHelper.testUrl('/login');
 	});
 
-	it('Should save accessToken if valid credentials are provided', () => {
+	it('Should save account if valid credentials are provided', () => {
 		Http.mockOk();
 		simulateValidSubmit();
 		cy.getByTestId('main-error').should('not.exist');
 		cy.getByTestId('spinner').should('not.exist');
 		FormHelper.testUrl('/');
-		FormHelper.testLocalStorageItem('accessToken');
+		FormHelper.testLocalStorageItem('account');
 	});
 
 	it('Should prevent multiple submits', () => {
 		Http.mockOk();
-		cy.getByTestId('email').focus().type(faker.internet.email());
-		cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
+		populateFields();
 		cy.getByTestId('submit').dblclick();
 		FormHelper.testHttpCallsCount(1);
 	});
