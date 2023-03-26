@@ -3,6 +3,8 @@ node_modules
 coverage
 jest.config.js
 public
-webpack.config.js
+dist
+webpack.*
+index.js
 *.scss
 *.json
