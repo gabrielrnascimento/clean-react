@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "dev:base": "webpack-dev-server --open --config webpack.dev.js",
+    "dev:base": "webpack-dev-server --config webpack.dev.js",
     "dev": "npm run dev:base -- --open",
     "build": "webpack --config webpack.prod.js",
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --passWithNoTests --no-cache --runInBand",
@@ -58,6 +58,7 @@
     "mini-css-extract-plugin": "^2.3.0",
     "node-sass": "^8.0.0",
     "sass-loader": "^13.2.0",
+    "start-server-and-test": "^1.11.4",
     "style-loader": "^3.3.1",
     "ts-jest": "^29.0.5",
     "ts-loader": "^9.4.2",
