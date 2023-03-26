@@ -31,8 +31,7 @@ jobs:
     - name: Run Cypress tests
       uses: cypress-io/github-action@v5
       with:
-        start: npm run dev:base
-
+        command: npm run test:cypress:ci
       
     - name: Build
       run: npx webpack --config webpack.prod.js
