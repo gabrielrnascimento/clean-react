@@ -1,9 +1,10 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { getCurrentAccountAdapter, setCurrentAccountAdapter } from '@/main/adapters';
 import { makeLogin, makeSignUp, makeSurveyList } from '@/main/factories/pages';
 import { ApiContext } from '@/presentation/contexts';
-import { getCurrentAccountAdapter, setCurrentAccountAdapter } from '@/main/adapters';
 import { PrivateRoute } from '@/presentation/components';
+import { SurveyResult } from '@/presentation/pages';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React from 'react';
 
 const Router: React.FC = () => {
 	return (
@@ -18,6 +19,7 @@ const Router: React.FC = () => {
 					<Route path='/login' exact component={makeLogin} />
 					<Route path='/signup' exact component={makeSignUp} />
 					<PrivateRoute path='/' exact component={makeSurveyList} />
+					<PrivateRoute path='/surveys' exact component={SurveyResult} />
 				</Switch>
 			</BrowserRouter>
 		</ApiContext.Provider>
