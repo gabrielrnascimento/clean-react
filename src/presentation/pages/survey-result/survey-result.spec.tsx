@@ -4,7 +4,7 @@ import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel } from '@/
 import { SurveyResult } from '@/presentation/pages';
 import ApiContext from '@/presentation/contexts/api/api-context';
 import { createMemoryHistory, type MemoryHistory } from 'history';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Router } from 'react-router-dom';
 
@@ -93,5 +93,15 @@ describe('SurveyResult Component', () => {
 		await waitFor(() => screen.getAllByTestId('survey-result'));
 		expect(setCurrentAccountMock).toHaveBeenCalledWith(undefined);
 		expect(history.location.pathname).toBe('/login');
+	});
+
+	test('Should call LoadSurveyResult on reload', async () => {
+		const loadSurveyResultSpy = new LoadSurveyResultSpy();
+		jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(new UnexpectedError());
+		makeSut(loadSurveyResultSpy);
+		await waitFor(() => screen.getAllByTestId('survey-result'));
+		fireEvent.click(screen.getByTestId('reload'));
+		await waitFor(() => screen.getAllByTestId('survey-result'));
+		expect(loadSurveyResultSpy.callsCount).toBe(1);
 	});
 });
