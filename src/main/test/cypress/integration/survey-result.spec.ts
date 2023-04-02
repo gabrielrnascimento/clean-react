@@ -34,6 +34,14 @@ describe('SurveyResult', () => {
 		Helper.testUrl('/login');
 	});
 
+	it('Should go to SurveyList on back button click', () => {
+		mockSuccess();
+		cy.visit('/');
+		cy.visit('/surveys/any_id');
+		cy.getByTestId('back-button').click();
+		Helper.testUrl('/');
+	});
+
 	it('Should present survey result', () => {
 		mockSuccess();
 		cy.visit('/surveys/any_id');
