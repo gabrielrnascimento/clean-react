@@ -1,9 +1,10 @@
-import { Calendar } from '@/presentation/components';
 import Styles from './result-styles.scss';
+import { type LoadSurveyResult } from '@/domain/usecases';
+import { Calendar } from '@/presentation/components';
+import { SurveyResultAnswer } from '@/presentation/pages/survey-result/components/';
 import FlipMove from 'react-flip-move';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { type LoadSurveyResult } from '@/domain/usecases';
 
 type Props = {
 	surveyResult: LoadSurveyResult.Model
@@ -20,13 +21,9 @@ const Result: React.FC<Props> = ({ surveyResult }: Props) => {
 					<h2 data-testid="question">{surveyResult.question}</h2>
 				</hgroup>
 				<FlipMove data-testid="answers" className={Styles.answersList}>
-					{surveyResult.answers.map(answer =>
-						<li data-testid="answer-wrap" key={answer.answer} className={answer.isCurrentAccountAnswer ? Styles.active : ''} >
-							{answer.image && <img data-testid="image" src={answer.image} alt={answer.answer} />}
-							<span data-testid="answer" className={Styles.answer}>{answer.answer}</span>
-							<span data-testid="percent" className={Styles.percent}>{answer.percent}%</span>
-						</li>
-					)}
+					<>
+						{surveyResult.answers.map(answer => <SurveyResultAnswer key={answer.answer} answer={answer} />)}
+					</>
 				</FlipMove >
 				<button className={Styles.button} data-testid="back-button" onClick={goBack} >Voltar</button>
 			</>
