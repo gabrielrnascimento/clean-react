@@ -130,7 +130,7 @@ describe('SurveyResult Component', () => {
 		expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
 	});
 
-	test('Should call SaveSurveyResukt on non active answer click', async () => {
+	test('Should call SaveSurveyResult on non active answer click', async () => {
 		const { saveSurveyResultSpy, loadSurveyResultSpy } = makeSut();
 		await waitFor(() => screen.getAllByTestId('survey-result'));
 		const answersWrap = screen.queryAllByTestId('answer-wrap');
@@ -153,5 +153,17 @@ describe('SurveyResult Component', () => {
 		expect(screen.queryByTestId('question')).not.toBeInTheDocument();
 		expect(screen.getByTestId('error')).toHaveTextContent(error.message);
 		expect(screen.queryByTestId('loaing')).not.toBeInTheDocument();
+	});
+
+	test('Should logout on AccessDeniedError', async () => {
+		const saveSurveyResultSpy = new SaveSurveyResultSpy();
+		jest.spyOn(saveSurveyResultSpy, 'save').mockRejectedValueOnce(new AccessDeniedError());
+		const { setCurrentAccountMock, history } = makeSut({ saveSurveyResultSpy });
+		await waitFor(() => screen.getAllByTestId('survey-result'));
+		const answersWrap = screen.queryAllByTestId('answer-wrap');
+		fireEvent.click(answersWrap[1]);
+		await waitFor(() => screen.getAllByTestId('survey-result'));
+		expect(setCurrentAccountMock).toHaveBeenCalledWith(undefined);
+		expect(history.location.pathname).toBe('/login');
 	});
 });
