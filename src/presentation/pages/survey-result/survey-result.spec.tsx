@@ -4,7 +4,7 @@ import { LoadSurveyResultSpy, SaveSurveyResultSpy, mockAccountModel, mockSurveyR
 import { SurveyResult } from '@/presentation/pages';
 import ApiContext from '@/presentation/contexts/api/api-context';
 import { createMemoryHistory, type MemoryHistory } from 'history';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Router } from 'react-router-dom';
 
@@ -134,8 +134,10 @@ describe('SurveyResult Component', () => {
 		const { saveSurveyResultSpy, loadSurveyResultSpy } = makeSut();
 		await waitFor(() => screen.getAllByTestId('survey-result'));
 		const answersWrap = screen.queryAllByTestId('answer-wrap');
-		fireEvent.click(answersWrap[1]);
-		expect(screen.queryByTestId('loading')).toBeInTheDocument();
+		await act(async () => {
+			fireEvent.click(answersWrap[1]);
+			await waitFor(() => screen.queryByTestId('loading'));
+		});
 		expect(saveSurveyResultSpy.params).toEqual({
 			answer: loadSurveyResultSpy.surveyResult.answers[1].answer
 		});
@@ -152,7 +154,7 @@ describe('SurveyResult Component', () => {
 		await waitFor(() => screen.getAllByTestId('survey-result'));
 		expect(screen.queryByTestId('question')).not.toBeInTheDocument();
 		expect(screen.getByTestId('error')).toHaveTextContent(error.message);
-		expect(screen.queryByTestId('loaing')).not.toBeInTheDocument();
+		expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
 	});
 
 	test('Should logout on AccessDeniedError', async () => {
@@ -165,5 +167,39 @@ describe('SurveyResult Component', () => {
 		await waitFor(() => screen.getAllByTestId('survey-result'));
 		expect(setCurrentAccountMock).toHaveBeenCalledWith(undefined);
 		expect(history.location.pathname).toBe('/login');
+	});
+
+	test('Should present SurveyResult data on SaveSurveyResult success', async () => {
+		const saveSurveyResultSpy = new SaveSurveyResultSpy();
+		const surveyResult = Object.assign(mockSurveyResultModel(), {
+			date: new Date('2018-02-20T00:00:00')
+		});
+		saveSurveyResultSpy.surveyResult = surveyResult;
+		makeSut({ saveSurveyResultSpy });
+
+		await waitFor(() => screen.getByTestId('survey-result'));
+		const answersWrap = screen.queryAllByTestId('answer-wrap');
+
+		fireEvent.click(answersWrap[1]);
+		await waitFor(() => screen.getAllByTestId('survey-result'));
+
+		expect(screen.getByTestId('day')).toHaveTextContent('20');
+		expect(screen.getByTestId('month')).toHaveTextContent(/^fev$/);
+		expect(screen.getByTestId('year')).toHaveTextContent('2018');
+		expect(screen.getByTestId('question')).toHaveTextContent(surveyResult.question);
+		expect(screen.getByTestId('answers').childElementCount).toBe(2);
+		expect(answersWrap[0]).toHaveClass('active');
+		expect(answersWrap[1]).not.toHaveClass('active');
+		const images = screen.queryAllByTestId('image');
+		expect(images[0]).toHaveAttribute('src', surveyResult.answers[0].image);
+		expect(images[0]).toHaveAttribute('alt', surveyResult.answers[0].answer);
+		expect(images[1]).toBeFalsy();
+		const answers = screen.queryAllByTestId('answer');
+		expect(answers[0]).toHaveTextContent(surveyResult.answers[0].answer);
+		expect(answers[1]).toHaveTextContent(surveyResult.answers[1].answer);
+		const percents = screen.queryAllByTestId('percent');
+		expect(percents[0]).toHaveTextContent(`${surveyResult.answers[0].percent}%`);
+		expect(percents[1]).toHaveTextContent(`${surveyResult.answers[1].percent}%`);
+		expect(screen.queryByTestId('loading')).not.toBeInTheDocument();
 	});
 });
