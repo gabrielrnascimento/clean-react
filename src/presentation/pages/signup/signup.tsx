@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
 import Styles from './signup-styles.scss';
-import { Footer, Input, LoginHeader, FormStatus, SubmitButton } from '@/presentation/components';
-import { ApiContext, FormContext } from '@/presentation/contexts';
+import { signUpState, Input, SubmitButton, FormStatus } from './components';
+import { Footer, LoginHeader } from '@/presentation/components';
+import { ApiContext } from '@/presentation/contexts';
 import { type Validation } from '@/presentation/protocols/validation';
 import { type AddAccount } from '@/domain/usecases';
 import { Link, useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import React, { useContext, useEffect } from 'react';
 
 type Props = {
 	validation: Validation
@@ -14,19 +16,7 @@ type Props = {
 const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
 	const { setCurrentAccount } = useContext(ApiContext);
 	const history = useHistory();
-	const [state, setState] = useState({
-		isLoading: false,
-		isFormInvalid: true,
-		name: '',
-		email: '',
-		password: '',
-		passwordConfirmation: '',
-		nameError: '',
-		emailError: '',
-		passwordError: '',
-		passwordConfirmationError: '',
-		mainError: ''
-	});
+	const [state, setState] = useRecoilState(signUpState);
 
 	useEffect(() => { validate('name'); }, [state.name]);
 	useEffect(() => { validate('email'); }, [state.email]);
@@ -67,19 +57,17 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
 	return (
 		<div className={Styles.signUpWrap}>
 			<LoginHeader />
-			<FormContext.Provider value={ { state, setState } }>
-				{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-				<form data-testid='form' className={Styles.form} onSubmit={handleSubmit}>
-					<h2>Criar Conta</h2>
-					<Input type='text' name='name' placeholder='Digite seu nome'/>
-					<Input type='email' name='email' placeholder='Digite seu e-mail'/>
-					<Input type='password' name='password' placeholder='Digite sua senha'/>
-					<Input type='password' name='passwordConfirmation' placeholder='Repita sua senha'/>
-					<SubmitButton text="Cadastrar" />
-					<Link data-testid="login-link" replace to="/login" className={Styles.link}>Voltar para Login</Link>
-					<FormStatus />
-				</form>
-			</FormContext.Provider>
+			{/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+			<form data-testid='form' className={Styles.form} onSubmit={handleSubmit}>
+				<h2>Criar Conta</h2>
+				<Input type='text' name='name' placeholder='Digite seu nome'/>
+				<Input type='email' name='email' placeholder='Digite seu e-mail'/>
+				<Input type='password' name='password' placeholder='Digite sua senha'/>
+				<Input type='password' name='passwordConfirmation' placeholder='Repita sua senha'/>
+				<SubmitButton text="Cadastrar" />
+				<Link data-testid="login-link" replace to="/login" className={Styles.link}>Voltar para Login</Link>
+				<FormStatus />
+			</form>
 			<Footer />
 		</div>
 	);
