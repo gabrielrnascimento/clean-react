@@ -1,4 +1,4 @@
-import { HttpStatusCode, type HttpClient } from '@/data/protocols/http';
+import { type HttpClient, HttpStatusCode } from '@/data/protocols/http';
 import { EmailInUseError, UnexpectedError } from '@/domain/errors';
 import { type AddAccount } from '@/domain/usecases';
 

@@ -1,7 +1,7 @@
-import Styles from './answer-styles.scss';
+import React, { useContext } from 'react';
 import { type SurveyResultAnswerModel } from '@/domain/models';
 import { SurveyResultContext } from '@/presentation/pages/survey-result/components';
-import React, { useContext } from 'react';
+import Styles from './answer-styles.scss';
 
 type Props = {
 	answer: SurveyResultAnswerModel

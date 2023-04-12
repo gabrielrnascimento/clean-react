@@ -1,15 +1,15 @@
-import SignUp from './signup';
-import { Helper, ValidationStub } from '@/presentation/test';
-import { EmailInUseError } from '@/domain/errors';
-import { ApiContext } from '@/presentation/contexts';
-import { type AddAccount } from '@/domain/usecases';
-import { AddAccountSpy } from '@/domain/test';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import faker from 'faker';
+import { createMemoryHistory } from 'history';
+import React from 'react';
 import { Router } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import React from 'react';
+import { EmailInUseError } from '@/domain/errors';
+import { AddAccountSpy } from '@/domain/test';
+import { type AddAccount } from '@/domain/usecases';
+import { ApiContext } from '@/presentation/contexts';
+import { Helper, ValidationStub } from '@/presentation/test';
+import SignUp from './signup';
 
 type SutTypes = {
 	addAccountSpy: AddAccountSpy

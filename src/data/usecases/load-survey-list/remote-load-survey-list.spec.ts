@@ -1,8 +1,8 @@
+import faker from 'faker';
+import { HttpStatusCode } from '@/data/protocols/http';
 import { HttpClientSpy, mockRemoteSurveyListModel } from '@/data/test';
 import { RemoteLoadSurveyList } from '@/data/usecases';
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors';
-import { HttpStatusCode } from '@/data/protocols/http';
-import faker from 'faker';
 
 type SutTypes = {
 	sut: RemoteLoadSurveyList

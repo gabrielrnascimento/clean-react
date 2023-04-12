@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { type SaveSurveyResult, type LoadSurveyResult } from '@/domain/usecases';
+import { type LoadSurveyResult, type SaveSurveyResult } from '@/domain/usecases';
 
 export const mockSaveSurveyResultParams = (): SaveSurveyResult.Params => ({
 	answer: faker.random.words(10)

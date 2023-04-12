@@ -1,12 +1,12 @@
-import Styles from './login-styles.scss';
-import { loginState, Input, SubmitButton, FormStatus } from './components';
+import React, { useContext, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { type Authentication } from '@/domain/usecases';
 import { Footer, LoginHeader } from '@/presentation/components';
 import { ApiContext } from '@/presentation/contexts';
 import { type Validation } from '@/presentation/protocols/validation';
-import { type Authentication } from '@/domain/usecases';
-import { Link, useHistory } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import React, { useEffect, useContext } from 'react';
+import { FormStatus, Input, SubmitButton, loginState } from './components';
+import Styles from './login-styles.scss';
 
 type Props = {
 	validation: Validation

@@ -1,9 +1,9 @@
-import { type SaveSurveyResult, type LoadSurveyResult } from '@/domain/usecases';
-import { Header, Footer, Loading, Error } from '@/presentation/components';
+import React, { useEffect, useState } from 'react';
+import { type LoadSurveyResult, type SaveSurveyResult } from '@/domain/usecases';
+import { Error, Footer, Header, Loading } from '@/presentation/components';
 import { useErrorHandler } from '@/presentation/hooks';
 import { SurveyResultContext, SurveyResultData } from '@/presentation/pages/survey-result/components';
 import Styles from './survey-result-styles.scss';
-import React, { useEffect, useState } from 'react';
 
 type Props = {
 	loadSurveyResult: LoadSurveyResult

@@ -1,6 +1,6 @@
-import Styles from './input-styles.scss';
-import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
+import Styles from './input-styles.scss';
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
 	state: any

@@ -1,6 +1,6 @@
-import { type AddAccount } from '../usecases';
-import { mockAccountModel } from './mock-account';
 import faker from 'faker';
+import { mockAccountModel } from './mock-account';
+import { type AddAccount } from '../usecases';
 
 export const mockAddAccountParams = (): AddAccount.Params => {
 	const password = faker.internet.password();

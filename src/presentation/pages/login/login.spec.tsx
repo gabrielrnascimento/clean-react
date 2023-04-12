@@ -1,15 +1,15 @@
-import { Login } from '@/presentation/pages';
-import { ValidationStub, Helper } from '@/presentation/test';
-import { InvalidCredentialsError } from '@/domain/errors';
-import { ApiContext } from '@/presentation/contexts';
-import { type Authentication } from '@/domain/usecases';
-import { AuthenticationSpy } from '@/domain/test';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import faker from 'faker';
 import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
-import { fireEvent, render, waitFor, screen } from '@testing-library/react';
-import { RecoilRoot } from 'recoil';
 import React from 'react';
+import { Router } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { InvalidCredentialsError } from '@/domain/errors';
+import { AuthenticationSpy } from '@/domain/test';
+import { type Authentication } from '@/domain/usecases';
+import { ApiContext } from '@/presentation/contexts';
+import { Login } from '@/presentation/pages';
+import { Helper, ValidationStub } from '@/presentation/test';
 
 type SutTypes = {
 	authenticationSpy: AuthenticationSpy

@@ -1,9 +1,9 @@
-import { RemoteAddAccount } from './remote-add-account';
-import { HttpClientSpy } from '@/data/test';
-import { HttpStatusCode } from '@/data/protocols/http';
-import { mockAddAccountModel, mockAddAccountParams } from '@/domain/test';
-import { EmailInUseError, UnexpectedError } from '@/domain/errors';
 import faker from 'faker';
+import { HttpStatusCode } from '@/data/protocols/http';
+import { HttpClientSpy } from '@/data/test';
+import { EmailInUseError, UnexpectedError } from '@/domain/errors';
+import { mockAddAccountModel, mockAddAccountParams } from '@/domain/test';
+import { RemoteAddAccount } from './remote-add-account';
 
 type SutTypes = {
 	sut: RemoteAddAccount

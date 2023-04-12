@@ -1,7 +1,7 @@
-import { signUpState } from './atoms';
-import { FormStatusBase } from '@/presentation/components';
-import { useRecoilState } from 'recoil';
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { FormStatusBase } from '@/presentation/components';
+import { signUpState } from './atoms';
 
 const FormStatus: React.FC = () => {
 	const [state] = useRecoilState(signUpState);

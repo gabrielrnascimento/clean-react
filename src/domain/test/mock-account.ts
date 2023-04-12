@@ -1,5 +1,5 @@
-import { type AccountModel } from '../models';
 import faker from 'faker';
+import { type AccountModel } from '../models';
 
 export const mockAccountModel = (): AccountModel => ({
 	accessToken: faker.datatype.uuid(),

@@ -1,12 +1,12 @@
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { type MemoryHistory, createMemoryHistory } from 'history';
+import React from 'react';
+import { Router } from 'react-router-dom';
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors';
 import { type AccountModel } from '@/domain/models';
 import { LoadSurveyResultSpy, SaveSurveyResultSpy, mockAccountModel, mockSurveyResultModel } from '@/domain/test';
-import { SurveyResult } from '@/presentation/pages';
 import ApiContext from '@/presentation/contexts/api/api-context';
-import { createMemoryHistory, type MemoryHistory } from 'history';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import React from 'react';
-import { Router } from 'react-router-dom';
+import { SurveyResult } from '@/presentation/pages';
 
 type SutTypes = {
 	loadSurveyResultSpy: LoadSurveyResultSpy

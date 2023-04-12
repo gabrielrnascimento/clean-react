@@ -1,10 +1,10 @@
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import { getCurrentAccountAdapter, setCurrentAccountAdapter } from '@/main/adapters';
 import { makeLogin, makeSignUp, makeSurveyList, makeSurveyResult } from '@/main/factories/pages';
-import { ApiContext } from '@/presentation/contexts';
 import { PrivateRoute } from '@/presentation/components';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
-import React from 'react';
+import { ApiContext } from '@/presentation/contexts';
 
 const Router: React.FC = () => {
 	return (
