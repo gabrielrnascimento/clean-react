@@ -1,5 +1,5 @@
-import { type GetStorage } from '../protocols/cache';
 import faker from 'faker';
+import { type GetStorage } from '../protocols/cache';
 
 export class GetStorageSpy implements GetStorage {
 	key: string;

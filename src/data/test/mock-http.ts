@@ -1,10 +1,10 @@
-import {
-	type HttpResponse,
-	HttpStatusCode,
-	type HttpRequest,
-	type HttpClient
-} from '@/data/protocols/http';
 import faker from 'faker';
+import {
+	type HttpClient,
+	type HttpRequest,
+	type HttpResponse,
+	HttpStatusCode
+} from '@/data/protocols/http';
 
 export const mockHttpRequest = (): HttpRequest => ({
 	url: faker.internet.url(),

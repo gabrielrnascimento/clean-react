@@ -1,7 +1,7 @@
 const { DefinePlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const common = require('./webpack.common')
 const { merge } = require('webpack-merge')
+const common = require('./webpack.common')
 
 module.exports = merge(common, {
 	mode: 'development',
@@ -28,7 +28,7 @@ module.exports = merge(common, {
 	devtool:'inline-source-map',
 	devServer: {
     static: {
-      directory: './dist'
+        directory: './dist'
     },
 		devMiddleware: {
 			writeToDisk: true
@@ -41,7 +41,8 @@ module.exports = merge(common, {
 			'process.env.API_URL': JSON.stringify('http://localhost:5050/api')
 		}),
 		new HtmlWebpackPlugin({
-			template: './template.dev.html'
+			template: './template.dev.html',
+			favicon: './public/favicon.png'
 		})
 	]
 })

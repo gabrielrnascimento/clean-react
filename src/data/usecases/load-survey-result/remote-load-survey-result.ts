@@ -1,5 +1,5 @@
 import { type RemoteSurveyResultModel } from '@/data/models';
-import { HttpStatusCode, type HttpClient } from '@/data/protocols/http';
+import { type HttpClient, HttpStatusCode } from '@/data/protocols/http';
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors';
 import { type LoadSurveyResult } from '@/domain/usecases';
 

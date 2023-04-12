@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Styles from './spinner-styles.scss';
-import PropTypes from 'prop-types';
 
 type Props = React.HTMLAttributes<HTMLElement> & {
 	negative?: boolean

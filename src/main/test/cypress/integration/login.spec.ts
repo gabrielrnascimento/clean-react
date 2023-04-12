@@ -1,7 +1,7 @@
+import faker from 'faker';
 import * as FormHelper from '../utils/form-helpers';
 import * as Helper from '../utils/helpers';
 import * as Http from '../utils/http-mocks';
-import faker from 'faker';
 
 const path = /login/;
 const mockInvalidCredentialsError = (): void => { Http.mockUnauthorizedError(path); };
@@ -30,6 +30,14 @@ describe('Login', () => {
 		FormHelper.testInputStatus('password', 'Campo obrigatório');
 		cy.getByTestId('submit').should('have.attr', 'disabled');
 		cy.getByTestId('error-wrap').should('not.have.descendants');
+	});
+
+	it('Should reset state on page load', () => {
+		cy.getByTestId('email').focus().type(faker.internet.email());
+		FormHelper.testInputStatus('email');
+		cy.getByTestId('signup-link').click();
+		cy.getByTestId('login-link').click();
+		FormHelper.testInputStatus('email', 'Campo obrigatório');
 	});
 
 	it('Should present error state if form is invalid', () => {

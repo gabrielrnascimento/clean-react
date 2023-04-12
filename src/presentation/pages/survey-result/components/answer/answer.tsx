@@ -1,14 +1,15 @@
-import Styles from './answer-styles.scss';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { type SurveyResultAnswerModel } from '@/domain/models';
-import { SurveyResultContext } from '@/presentation/pages/survey-result/components';
-import React, { useContext } from 'react';
+import { onSurveyAnswerState } from '@/presentation/pages/survey-result/components';
+import Styles from './answer-styles.scss';
 
 type Props = {
 	answer: SurveyResultAnswerModel
 };
 
 const Answer: React.FC<Props> = ({ answer }: Props) => {
-	const { onAnswer } = useContext(SurveyResultContext);
+	const { onAnswer } = useRecoilValue(onSurveyAnswerState);
 	const activeClassName = answer.isCurrentAccountAnswer ? Styles.active : '';
 	const answerClick = (event: React.MouseEvent): void => {
 		if (event.currentTarget.classList.contains(Styles.active)) {
