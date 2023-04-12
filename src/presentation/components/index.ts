@@ -11,3 +11,4 @@ export { default as Calendar } from './calendar/calendar';
 export { default as Error } from './error/error';
 export { default as SubmitButtonBase } from './submit-button/submit-button';
 export { default as PrivateRoute } from './private-route/private-route';
+export * from './atoms/atoms';

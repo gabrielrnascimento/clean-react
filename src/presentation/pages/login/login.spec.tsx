@@ -5,9 +5,9 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { InvalidCredentialsError } from '@/domain/errors';
-import { AuthenticationSpy } from '@/domain/test';
+import { AuthenticationSpy, mockAccountModel } from '@/domain/test';
 import { type Authentication } from '@/domain/usecases';
-import { ApiContext } from '@/presentation/contexts';
+import { currentAccountState } from '@/presentation/components';
 import { Login } from '@/presentation/pages';
 import { Helper, ValidationStub } from '@/presentation/test';
 
@@ -27,16 +27,16 @@ const makeSut = (params?: SutParams): SutTypes => {
 	validationStub.errorMessage = params?.validationError;
 	const authenticationSpy = new AuthenticationSpy();
 	const setCurrentAccountMock = jest.fn();
+	const mockedState = { setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() };
+
 	render(
-		<RecoilRoot>
-			<ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock }}>
-				<Router history={history}>
-					<Login
-						validation={validationStub}
-						authentication={authenticationSpy}
-					/>
-				</Router>
-			</ApiContext.Provider>
+		<RecoilRoot initializeState={({ set }) => { set(currentAccountState, mockedState); }}>
+			<Router history={history}>
+				<Login
+					validation={validationStub}
+					authentication={authenticationSpy}
+				/>
+			</Router>
 		</RecoilRoot>
 	);
 	return {
