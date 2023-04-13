@@ -8,6 +8,8 @@
     "dev:base": "webpack-dev-server --config webpack.dev.js",
     "dev": "npm run dev:base -- --open",
     "build": "webpack --config webpack.prod.js",
+		"up": "docker compose up -d",
+		"down": "docker compose down",
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
